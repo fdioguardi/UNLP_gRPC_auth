@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+// The authentication service definition.
+service Authenticator {
+  // Authenticates the user with the given credentials.
+  rpc authenticate (Credentials) returns (TokenResponse) {}
+}
+
+// The request message containig the username and password to authenticate.
+message Credentials {
+  string username = 1;
+  string hashed_password = 2;
+}
+
+// The response message containing the authentication token.
+message TokenResponse {
+  string token = 1;
+}
