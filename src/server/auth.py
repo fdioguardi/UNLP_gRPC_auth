@@ -15,16 +15,20 @@ class AuthenticatorServicer(src.service.auth_pb2_grpc.AuthenticatorServicer):
     def __init__(self):
         self.db = Database()
 
-    def Authenticate(self, request: Credentials, context: grpc.RpcContext) -> TokenResponse:
+    def Authenticate(
+        self, request: Credentials, context: grpc.RpcContext
+    ) -> TokenResponse:
         """
         Authenticates a user and returns a JWT token.
 
-        :param request: The request containing the username and 
+        :param request: The request containing the username and
             hashed password.
         :param context: The context of the request.
         :return: A token response containing the JWT token.
         """
-        user: User | None = self.db.authenticate(request.username, request.hashed_password)
+        user: User | None = self.db.authenticate(
+            request.username, request.hashed_password
+        )
 
         if user is None:
             context.set_code(grpc.StatusCode.UNAUTHENTICATED)

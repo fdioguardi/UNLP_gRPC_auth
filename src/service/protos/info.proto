@@ -3,7 +3,7 @@ syntax = "proto3";
 // The information service definition.
 service Informant {
   // Authenticates the user with the given credentials.
-  rpc GetInfo (TokenRequest) returns (Information) {}
+  rpc getInfo (TokenRequest) returns (Information) {}
 }
 
 // The request message containing the token to verify the user's identity.
@@ -13,7 +13,7 @@ message TokenRequest {
 
 // The response message containing the user's information.
 message Information {
-  string username = 1
+  string username = 1;
   string name = 2;
   string surname = 3;
   string email = 4;

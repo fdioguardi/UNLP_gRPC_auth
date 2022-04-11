@@ -24,4 +24,9 @@ class InformantServicer(src.service.info_pb2_grpc.InformantServicer):
             context.set_details("Invalid token")
             return Information()
 
-        return Information(username=user.username, name=user.name, surname=user.surname, email=user.email)
+        return Information(
+            username=user.username,
+            name=user.name,
+            surname=user.surname,
+            email=user.email,
+        )
