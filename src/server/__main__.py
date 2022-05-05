@@ -13,7 +13,7 @@ def start_auth_server():
     auth_pb2_grpc.add_AuthenticatorServicer_to_server(
         auth_pb2_grpc.AuthenticatorServicer(), auth_server
     )
-    auth_server.add_insecure_port("[::]:50051")
+    auth_server.add_insecure_port("[::]:5901")
     auth_server.start()
     auth_server.wait_for_termination()
 
@@ -23,7 +23,7 @@ def start_info_server():
     info_pb2_grpc.add_InformantServicer_to_server(
         info_pb2_grpc.InformantServicer(), info_server
     )
-    info_server.add_insecure_port("[::]:50052")
+    info_server.add_insecure_port("[::]:6901")
     info_server.start()
     info_server.wait_for_termination()
 

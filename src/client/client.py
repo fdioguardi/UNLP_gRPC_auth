@@ -14,7 +14,7 @@ import hashlib
 
 
 # Create a channel to the server
-auth_channel = grpc.insecure_channel("localhost:50051")
+auth_channel = grpc.insecure_channel("localhost:5901")
 
 # Connect to the authentication server
 auth_stub = auth_pb2_grpc.AuthenticatorStub(auth_channel)
@@ -33,7 +33,7 @@ except grpc.RpcError as e:
 # ------------------
 
 # Connect to the information server
-info_channel = grpc.insecure_channel("localhost:50052")
+info_channel = grpc.insecure_channel("localhost:6901")
 
 # Connect to the information server
 info_stub = info_pb2_grpc.InformantStub(info_channel)
