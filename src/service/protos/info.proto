@@ -2,7 +2,7 @@ syntax = "proto3";
 
 // The information service definition.
 service Informant {
-  // Authenticates the user with the given credentials.
+  // Returns the information of the user.
   rpc getInfo (TokenRequest) returns (Information) {}
 }
 

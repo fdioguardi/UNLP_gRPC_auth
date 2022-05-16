@@ -27,7 +27,7 @@ class InformantServicer(object):
     """
 
     def getInfo(self, request, context):
-        """Authenticates the user with the given credentials.
+        """Returns the information of the user.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

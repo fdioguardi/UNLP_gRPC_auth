@@ -25,6 +25,7 @@ def get_args() -> argparse.Namespace:
 
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument(
+        "-s",
         "--server",
         action="store_const",
         const=start_servers,
@@ -32,6 +33,7 @@ def get_args() -> argparse.Namespace:
         help="Start gRPC servers.",
     )
     group.add_argument(
+        "-c",
         "--client",
         action="store_const",
         const=start_client,

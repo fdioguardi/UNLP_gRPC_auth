@@ -6,9 +6,9 @@ user information from an information server.
 import grpc
 
 import src.service.auth_pb2 as auth_pb2
-import src.service.auth_pb2_grpc as auth_pb2_grpc
+import src.service.auth_pb2_grpc as auth_grpc
 import src.service.info_pb2 as info_pb2
-import src.service.info_pb2_grpc as info_pb2_grpc
+import src.service.info_pb2_grpc as info_grpc
 
 import hashlib
 
@@ -18,7 +18,7 @@ def start_client():
     auth_channel = grpc.insecure_channel("localhost:5901")
 
     # Connect to the authentication server
-    auth_stub = auth_pb2_grpc.AuthenticatorStub(auth_channel)
+    auth_stub = auth_grpc.AuthenticatorStub(auth_channel)
 
     hashed_password = hashlib.sha256(b"password1").hexdigest()
     auth_request = auth_pb2.Credentials(
@@ -39,7 +39,7 @@ def start_client():
     info_channel = grpc.insecure_channel("localhost:6901")
 
     # Connect to the information server
-    info_stub = info_pb2_grpc.InformantStub(info_channel)
+    info_stub = info_grpc.InformantStub(info_channel)
 
     info_request = info_pb2.TokenRequest(token=auth_response.token)
 

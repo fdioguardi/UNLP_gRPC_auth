@@ -12,10 +12,11 @@ class AuthenticatorServicer(src.service.auth_pb2_grpc.AuthenticatorServicer):
     authenticate users in other services.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.db = Database()
+        super().__init__(*args, **kwargs)
 
-    def Authenticate(
+    def authenticate(
         self, request: Credentials, context: grpc.RpcContext
     ) -> TokenResponse:
         """

@@ -11,10 +11,11 @@ class InformantServicer(src.service.info_pb2_grpc.InformantServicer):
     to be sent in the request.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.db = Database()
+        super().__init__(*args, **kwargs)
 
-    def GetInfo(self, request: TokenRequest, context: grpc.RpcContext) -> Information:
+    def getInfo(self, request: TokenRequest, context: grpc.RpcContext) -> Information:
         """
         Get information about a user.
         """
