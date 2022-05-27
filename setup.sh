@@ -1,12 +1,12 @@
 #!/bin/sh
-/etc/init.d/dbus start
 
 # Install MongoDB
-wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
-echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.6 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.6.list
-apt-get update
-yes "" | apt-get install -y --allow-unauthenticated mongodb-org
-systemctl start mongod
+/etc/init.d/dbus start
+mkdir -p /data/db
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4B7C549A058F8B6B
+echo "deb [arch=amd64] http://repo.mongodb.org/apt/ubuntu $(lsb_release -sc)/mongodb-org/4.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+apt update
+yes "" | apt install -y --allow-unauthenticated mongodb-org
 
 # Install Python3.7
 apt-get update

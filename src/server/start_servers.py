@@ -28,10 +28,15 @@ def _start_info_server():
     info_server.start()
     info_server.wait_for_termination()
 
+def _start_mongodb():
+    import os
+    os.system("mongod")
+
 
 def start_servers():
     auth_process = mp.Process(target=_start_auth_server)
     info_process = mp.Process(target=_start_info_server)
+    mp.Process(target=_start_mongodb).start()
 
     auth_process.start()
     info_process.start()
