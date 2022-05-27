@@ -1,7 +1,7 @@
 import grpc
 
 from src.server.db import Database, User
-from src.service.info_pb2 import TokenRequest, Information
+from src.service.info_pb2 import Information, TokenRequest
 import src.service.info_pb2_grpc
 
 

@@ -4,6 +4,7 @@ A script to start the authentication and information servers
 
 from concurrent import futures
 import multiprocessing as mp
+import os
 
 import grpc
 
@@ -30,8 +31,6 @@ def _start_info_server():
 
 
 def _start_mongodb():
-    import os
-
     os.system("mongod")
 
 

@@ -1,10 +1,12 @@
 from __future__ import annotations
-import mongoengine
+
 import jwt
+import mongoengine
 
 from src import utils
 
-USERS = [
+SECRET: str = "secret23804"
+USERS: list[dict[str, str]] = [
     {
         "username": "user1",
         "hashed_password": utils.hash_passwd("password1"),
@@ -61,9 +63,7 @@ class Database:
         :return: the user if exists, None otherwise
         """
         try:
-            username: str = jwt.decode(token, "secret23804", algorithms=["HS256"])[
-                "username"
-            ]
+            username: str = jwt.decode(token, SECRET, algorithms=["HS256"])["username"]
         except jwt.InvalidTokenError:
             return None
 
@@ -86,4 +86,4 @@ class User(mongoengine.Document):
         Generate a JWT token for the user.
         :return: the JWT token
         """
-        return jwt.encode({"username": self.username}, "secret23804", algorithm="HS256")
+        return jwt.encode({"username": self.username}, SECRET, algorithm="HS256")
