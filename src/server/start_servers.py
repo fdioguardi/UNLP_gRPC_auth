@@ -28,8 +28,10 @@ def _start_info_server():
     info_server.start()
     info_server.wait_for_termination()
 
+
 def _start_mongodb():
     import os
+
     os.system("mongod")
 
 

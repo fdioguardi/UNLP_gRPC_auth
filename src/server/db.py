@@ -2,6 +2,25 @@ from __future__ import annotations
 import mongoengine
 import jwt
 
+from src import utils
+
+USERS = [
+    {
+        "username": "user1",
+        "hashed_password": utils.hash_passwd("password1"),
+        "name": "Roberto",
+        "surname": "Carlos",
+        "email": "rc@email.com",
+    },
+    {
+        "username": "admin",
+        "hashed_password": utils.hash_passwd("admin"),
+        "name": "Admin",
+        "surname": "Admin",
+        "email": "admin@email.com",
+    },
+]
+
 
 class Database:
     """A class to manage the Users database"""
@@ -11,6 +30,10 @@ class Database:
         Initialize the database
         """
         mongoengine.connect("users")
+
+        if not User.objects.count():
+            for user in USERS:
+                User(**user).save()
 
     def authenticate(self, username: str, hashed_password: str) -> User | None:
         """

@@ -10,7 +10,7 @@ import src.service.auth_pb2_grpc as auth_grpc
 import src.service.info_pb2 as info_pb2
 import src.service.info_pb2_grpc as info_grpc
 
-import hashlib
+from src import utils
 
 
 def start_client():
@@ -20,9 +20,8 @@ def start_client():
     # Connect to the authentication server
     auth_stub = auth_grpc.AuthenticatorStub(auth_channel)
 
-    hashed_password = hashlib.sha256(b"password1").hexdigest()
     auth_request = auth_pb2.Credentials(
-        username="user1", hashed_password=hashed_password
+        username="user1", hashed_password=utils.hash_passwd("password1")
     )
 
     try:
