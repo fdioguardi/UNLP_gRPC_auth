@@ -1,7 +1,7 @@
 .PHONY: clean setup lint
 .DEFAULT_GOAL := help
 
-PYTHON := python
+PYTHON := python3.7
 LINTER := black
 
 # Run the server
@@ -27,7 +27,7 @@ clean:
 
 # Build the project
 setup:
-	chmod +x ./setup.sh && ./setup.sh
+	chmod +x ./setup.sh && sh ./setup.sh
 
 # Show help
 help:

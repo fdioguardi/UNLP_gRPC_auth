@@ -21,6 +21,8 @@ class Database:
         """
         user: User | None = User.objects(username=username).first()
 
+        print(user)
+
         if user is None:
             return None
 
@@ -54,7 +56,7 @@ class User(mongoengine.Document):
     email = mongoengine.StringField(required=True)
     hashed_password = mongoengine.StringField(required=True)
 
-    meta = {"db_alias": "users", "collection": "users"}
+    meta = {"db_alias": "default", "collection": "users"}
 
     def generate_token(self) -> str:
         """

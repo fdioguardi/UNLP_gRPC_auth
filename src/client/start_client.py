@@ -15,7 +15,7 @@ import hashlib
 
 def start_client():
     # Create a channel to the server
-    auth_channel = grpc.insecure_channel("localhost:5901")
+    auth_channel = grpc.insecure_channel("localhost:5000")
 
     # Connect to the authentication server
     auth_stub = auth_grpc.AuthenticatorStub(auth_channel)
@@ -36,7 +36,7 @@ def start_client():
     # ------------------
 
     # Connect to the information server
-    info_channel = grpc.insecure_channel("localhost:6901")
+    info_channel = grpc.insecure_channel("localhost:5001")
 
     # Connect to the information server
     info_stub = info_grpc.InformantStub(info_channel)
