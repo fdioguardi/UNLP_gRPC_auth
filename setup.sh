@@ -8,7 +8,7 @@ echo "deb [arch=amd64] http://repo.mongodb.org/apt/ubuntu $(lsb_release -sc)/mon
 apt update
 yes "" | apt install -y --allow-unauthenticated mongodb-org
 
-# Install Python3.7
+# Install Python 3.7
 apt-get update
 apt install -y build-essential checkinstall libreadline-gplv2-dev \
   libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev \
