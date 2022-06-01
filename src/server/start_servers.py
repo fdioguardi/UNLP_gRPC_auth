@@ -11,7 +11,7 @@ import grpc
 from src.server.auth import AuthenticatorServicer
 from src.server.info import InformantServicer
 import src.service.auth_pb2_grpc as auth_grpc
-import src.service.info_pb2_grpc as info_grpc
+import src.service.info_pb2_grpc as stub
 
 
 def _start_auth_server():
@@ -24,7 +24,7 @@ def _start_auth_server():
 
 def _start_info_server():
     info_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    info_grpc.add_InformantServicer_to_server(InformantServicer(), info_server)
+    stub.add_InformantServicer_to_server(InformantServicer(), info_server)
     info_server.add_insecure_port("[::]:5001")
     info_server.start()
     info_server.wait_for_termination()

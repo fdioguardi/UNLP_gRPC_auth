@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nauth.proto\"8\n\x0b\x43redentials\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x17\n\x0fhashed_password\x18\x02 \x01(\t\"\x1e\n\rTokenResponse\x12\r\n\x05token\x18\x01 \x01(\t2?\n\rAuthenticator\x12.\n\x0c\x61uthenticate\x12\x0c.Credentials\x1a\x0e.TokenResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nauth.proto\"1\n\x0b\x43redentials\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\x1e\n\rTokenResponse\x12\r\n\x05token\x18\x01 \x01(\t2?\n\rAuthenticator\x12.\n\x0c\x61uthenticate\x12\x0c.Credentials\x1a\x0e.TokenResponse\"\x00\x62\x06proto3')
 
 
 
@@ -39,9 +39,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _CREDENTIALS._serialized_start=14
-  _CREDENTIALS._serialized_end=70
-  _TOKENRESPONSE._serialized_start=72
-  _TOKENRESPONSE._serialized_end=102
-  _AUTHENTICATOR._serialized_start=104
-  _AUTHENTICATOR._serialized_end=167
+  _CREDENTIALS._serialized_end=63
+  _TOKENRESPONSE._serialized_start=65
+  _TOKENRESPONSE._serialized_end=95
+  _AUTHENTICATOR._serialized_start=97
+  _AUTHENTICATOR._serialized_end=160
 # @@protoc_insertion_point(module_scope)

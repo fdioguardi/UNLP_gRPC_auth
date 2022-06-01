@@ -1,27 +1,32 @@
 from __future__ import annotations
+import hashlib
 
 import jwt
 import mongoengine
 
-from src import utils
+
+def hash_passwd(password: str) -> str:
+    """Hash a string using the SHA-256 algorithm."""
+    return hashlib.sha256(bytes(password, "utf-8")).hexdigest()
 
 SECRET: str = "secret23804"
 USERS: list[dict[str, str]] = [
     {
         "username": "user1",
-        "hashed_password": utils.hash_passwd("password1"),
+        "hashed_password": hash_passwd("password1"),
         "name": "Roberto",
         "surname": "Carlos",
         "email": "rc@email.com",
     },
     {
         "username": "admin",
-        "hashed_password": utils.hash_passwd("admin"),
+        "hashed_password": hash_passwd("admin"),
         "name": "Admin",
         "surname": "Admin",
         "email": "admin@email.com",
     },
 ]
+
 
 
 class Database:
@@ -37,11 +42,11 @@ class Database:
             for user in USERS:
                 User(**user).save()
 
-    def authenticate(self, username: str, hashed_password: str) -> User | None:
+    def authenticate(self, username: str, password: str) -> User | None:
         """
         Authenticate a user
         :param username: the username of the user
-        :param hashed_password: the hashed password of the user
+        :param password: the password of the user
         :return: The user if exists, None otherwise
         """
         user: User | None = User.objects(username=username).first()
@@ -51,7 +56,7 @@ class Database:
         if user is None:
             return None
 
-        if user.hashed_password == hashed_password:
+        if user.is_password(password):
             return user
 
         return None
@@ -87,3 +92,11 @@ class User(mongoengine.Document):
         :return: the JWT token
         """
         return jwt.encode({"username": self.username}, SECRET, algorithm="HS256")
+
+    def is_password(self, password: str) -> bool:
+        """
+        Check if the password is correct
+        :param password: the password
+        :return: True if the password is correct, False otherwise
+        """
+        return self.hashed_password == hash_passwd(password)
