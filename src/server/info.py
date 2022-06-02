@@ -18,6 +18,10 @@ class InformantServicer(src.service.info_pb2_grpc.InformantServicer):
     def getInfo(self, request: TokenRequest, context: grpc.RpcContext) -> Information:
         """
         Get information about a user.
+
+        :param request: A TokenRequest object containing the JWT token.
+        :param context: The context of the request.
+        :return: An Information object containing the user's data.
         """
         user: User | None = self.db.get_user_by_token(request.token)
         if user is None:

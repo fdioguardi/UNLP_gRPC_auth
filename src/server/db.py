@@ -9,6 +9,7 @@ def hash_passwd(password: str) -> str:
     """Hash a string using the SHA-256 algorithm."""
     return hashlib.sha256(bytes(password, "utf-8")).hexdigest()
 
+
 SECRET: str = "secret23804"
 USERS: list[dict[str, str]] = [
     {
@@ -28,14 +29,12 @@ USERS: list[dict[str, str]] = [
 ]
 
 
-
 class Database:
-    """A class to manage the Users database"""
+    """A class to manage the Users' database."""
 
     def __init__(self):
-        """
-        Initialize the database
-        """
+        """Initialize the database."""
+
         mongoengine.connect("users")
 
         if not User.objects.count():
@@ -44,14 +43,13 @@ class Database:
 
     def authenticate(self, username: str, password: str) -> User | None:
         """
-        Authenticate a user
-        :param username: the username of the user
-        :param password: the password of the user
-        :return: The user if exists, None otherwise
+        Authenticate a user.
+
+        :param username: the username of the user.
+        :param password: the password of the user.
+        :return: The user if exists, None otherwise.
         """
         user: User | None = User.objects(username=username).first()
-
-        print(user)
 
         if user is None:
             return None
@@ -63,9 +61,10 @@ class Database:
 
     def get_user_by_token(self, token: str) -> User | None:
         """
-        Get the user from the token
-        :param token: the token
-        :return: the user if exists, None otherwise
+        Get the user from the token.
+
+        :param token: the token.
+        :return: the user if exists, None otherwise.
         """
         try:
             username: str = jwt.decode(token, SECRET, algorithms=["HS256"])["username"]
@@ -76,7 +75,7 @@ class Database:
 
 
 class User(mongoengine.Document):
-    """A model for a User"""
+    """A model for a User."""
 
     username = mongoengine.StringField(required=True, max_length=50)
     name = mongoengine.StringField(required=True)
@@ -89,14 +88,16 @@ class User(mongoengine.Document):
     def generate_token(self) -> str:
         """
         Generate a JWT token for the user.
-        :return: the JWT token
+
+        :return: the JWT token.
         """
         return jwt.encode({"username": self.username}, SECRET, algorithm="HS256")
 
     def is_password(self, password: str) -> bool:
         """
-        Check if the password is correct
-        :param password: the password
-        :return: True if the password is correct, False otherwise
+        Check if the password is correct.
+
+        :param password: the password.
+        :return: True if the password is correct, False otherwise.
         """
         return self.hashed_password == hash_passwd(password)
